@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Neataptic</title>
+    <script src="https://wagenaartje.github.io/neataptic/cdn/1.2.30/neataptic.js"></script>
+  </head>
+  <body>
+    <div id="output"></div>
+  </body>
+  <script>
+  // --- Functions
+Array.prototype.max = function() {
+	return Math.max.apply(null, this);
+};
+
+Array.prototype.min = function() {
+	return Math.min.apply(null, this);
+};
+
+function normalize(data) {
+	let max = data.max();
+	let min = data.min();
+	return data.map(v => {
+		let top = v - min;
+		let bottom = max - min;
+		return top / bottom;
+	});
+}
+
+function normalizePoint(v, data) {
+	let max = data.max();
+	let min = data.min();
+	let top = v - min;
+	let bottom = max - min;
+	return top / bottom;
+}
+
+function restore(value, data) {
+	let max = data.max();
+	let min = data.min();
+
+	return value * max + min;
+}
+
+function makeTrainingSet(h, t, l) {
+	let set = [];
+	h = normalize(h);
+	t = normalize(t);
+	l = normalize(l);
+	for (let i = 0; i < h.length; i++) {
+		set.push({
+			input: [h[i], t[i]],
+			output: [l[i]],
+		});
+	}
+	return set;
+}
+
+// ----------
+
+var Node = neataptic.Node;
+var Neat = neataptic.Neat;
+var Network = neataptic.Network;
+var Methods = neataptic.Methods;
+var Architect = neataptic.Architect;
+
+let humidity = [
+	75,
+	75,
+	75,
+	75,
+	100,
+	100,
+	100,
+	100,
+	100,
+	78,
+	78,
+	78,
+	78,
+	58,
+	58,
+	58,
+	58,
+	17,
+	17,
+	17,
+	17,
+	2,
+	2,
+	2,
+	2,
+	2,
+];
+
+let temp = [
+	86,
+	68,
+	50,
+	41,
+	96.8,
+	86,
+	68,
+	50,
+	42.8,
+	41,
+	50,
+	68,
+	86,
+	45.5,
+	50,
+	68,
+	86,
+	53.6,
+	59,
+	68,
+	86,
+	69.8,
+	71.6,
+	77,
+	86,
+	104,
+];
+
+let years = [
+	125,
+	625,
+	2500,
+	5800,
+	1,
+	100,
+	400,
+	1750,
+	3750,
+	5000,
+	2500,
+	500,
+	100,
+	5200,
+	2900,
+	625,
+	100,
+	5750,
+	2500,
+	1100,
+	100,
+	6000,
+	5000,
+	2800,
+	1300,
+	400,
+];
+
+// myNetwork = Architect.Perceptron(2, 7, 4, 1);
+//
+// let set = makeTrainingSet(humidity, temp, years);
+//
+// myNetwork.train(set, {
+// 	log: 1000,
+// 	error: 0.000001,
+// 	iterations: 2000000,
+// 	rate: 0.02,
+// });
+//
+// for (let i = 0; i < humidity.length; i++) {
+// 	let actH = humidity[i];
+// 	let actT = temp[i];
+// 	let res = myNetwork.activate([normalizePoint(actH, humidity), normalizePoint(actT, temp)]);
+// 	console.log(`years: ${years[i]}, nn: ${restore(res, years)}`);
+// }
+// var exported = myNetwork.toJSON();
+// console.log(JSON.stringify(exported));
+
+var myRequest = new Request('nnSave.json');
+
+fetch(myRequest)
+	.then(function(response) {
+		return response.json();
+	})
+	.then(function(data) {
+		let copy = Network.fromJSON(data);
+		let output = 'Temperature,Humidity,Years</br>';
+		for (let i = 0; i < 100; i++) {
+			//console.log(`years: ${years[i]}, nn: ${restore(res, years)}`);
+			for (let j = 0; j < 100; j++) {
+				let humeVal = i;
+				let tempVal = j;
+				let yrs = copy.activate([normalizePoint(humeVal, humidity), normalizePoint(tempVal, temp)]);
+				yrs = restore(yrs, years);
+				output += `${tempVal},${humeVal},${yrs}</br>`;
+			}
+			document.getElementById('output').innerHTML = output;
+		}
+		// let res = copy.activate([normalizePoint(61.94, humidity), normalizePoint(67.61, temp)]);
+		// console.log();
+	})
+	.catch(err => {
+		console.error(err);
+	});
+</script>
+</html>
+
+
+<!--
+humidity, temperature, years
+61.94, 67.61, 659.80484609847
+
+
+
+
+-->
