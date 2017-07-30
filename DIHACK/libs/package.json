@@ -1,0 +1,15 @@
+{
+  "name": "u",
+  "version": "1.0.0",
+  "description": "",
+  "main": "angular-route.min.js",
+  "dependencies": {
+    "angular-animate": "^1.6.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

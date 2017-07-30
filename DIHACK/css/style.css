@@ -1,0 +1,125 @@
+body {
+  background-color: #d4d4d6;
+  background: -webkit-linear-gradient(#373738, white); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#373738, white); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#373738, white); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#373738, white); /* Standard syntax */
+  background-position: center center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+a {
+  text-decoration: none;
+  margin-top: 10px;
+  color: #efefef;
+}
+
+h1 {
+  margin-bottom: 5px;
+}
+
+#health {
+  display: inline-block;
+  color: #efefef;
+  padding-left: 20px;
+}
+
+#systemInfo {
+  display: inline-block;
+  margin-left: 80px;
+  font-size: 140%;
+  color: #efefef;
+  border: 1px solid #efefef;
+  border-radius: 50%;
+  padding: 3px 10px;
+}
+
+
+#indicator {
+  text-align: center;
+}
+
+figure {
+  vertical-align: top;
+  display: inline-block;
+  text-align: center;
+  margin-top: 0;
+  width: 25%;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+#gradient {
+  height: 100px;
+  width: 8px;
+  border-radius: 10px;
+  margin: 0 auto;
+  background: red; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(blue, red); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(blue, red); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(blue, red); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(blue, red); /* Standard syntax */
+}
+
+#holder {
+  padding-right: 10px;
+  background: #efefef;
+  padding-left: 10px;
+  height: 170px;
+  display: inline-block;
+  padding-top: 20px;
+  border-radius: 25px;
+  margin-top: 20px;
+}
+
+#diamond {
+    border-style: solid;
+    border-color: transparent transparent red transparent;
+    border-width: 0 25px 25px 25px;
+    height: 0;
+    width: 100px;
+    position: relative;
+    margin: 20px 0 50px 0;
+}
+#diamond:after {
+    content: "";
+    position: absolute;
+    top: 25px;
+    right: -25px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: red transparent transparent transparent;
+    border-width: 100px 75px 0 75px;
+}
+
+#temp {
+  text-align: center;
+  width: 100%;
+}
+
+.home {
+  display: inline-block;
+  margin: 0 auto;
+  width: 45%;
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: #efefef;
+}
+
+.title {
+  border-top: 2px solid #979799;
+  padding: 10px;
+  margin: 0 25px 0 25px;
+
+}
+
+#attention {
+  text-align: center;
+  color: red;
+  font-size: 350%;
+}
