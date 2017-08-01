@@ -10,3 +10,7 @@
   - The front-end interface for the application.
 4. ThermostatControl.m
   - An arduino sketch used to take input from the system/cloud and control the analog thermostat in cold storage. This is the intervention step incase temperature or humidity become out of bounds.
+5. ESteelMaterials.zip
+  - ESteel documentation, includes PDF of slide deck with incomplete documentation of team activities, as well as relevant code files and spreadsheets containing data, and PDFs of literature references that contributed to material kinetic modeling. Also includes files provided by Samuel John and Javad Roostai.
+6. MatlabCodeV2.m
+  - Code used to process and model the data to produce the 3d heat map of temp and humidity vs years of life expectancy.
